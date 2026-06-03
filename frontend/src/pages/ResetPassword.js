@@ -1,59 +1,132 @@
 import { useState } from "react";
 import axios from "axios";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 function ResetPassword() {
-  const [token, setToken] = useState("");
-  const [password, setPassword] =
+
+  const navigate =
+    useNavigate();
+
+  const [token, setToken] =
     useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [password,
+    setPassword] =
+    useState("");
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
-        {
-          token,
-          password
-        }
-      );
+  const handleSubmit =
+    async (e) => {
 
-      alert(res.data.message);
+      e.preventDefault();
 
-    } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Something went wrong"
-      );
-    }
-  };
+      try {
+
+        const res =
+          await axios.post(
+            "http://localhost:5000/api/auth/reset-password",
+            {
+              token,
+              password
+            }
+          );
+
+        alert(
+          res.data.message
+        );
+
+        navigate("/");
+
+      } catch (error) {
+
+        alert(
+          error.response?.data?.message ||
+          "Something went wrong"
+        );
+
+      }
+
+    };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Reset Password</h2>
+    <div className="auth-container">
 
-      <input
-        type="text"
-        placeholder="Reset Token"
-        value={token}
-        onChange={(e) =>
-          setToken(e.target.value)
-        }
-      />
+      <div className="auth-card">
 
-      <input
-        type="password"
-        placeholder="New Password"
-        value={password}
-        onChange={(e) =>
-          setPassword(e.target.value)
-        }
-      />
+        <h1>EMS</h1>
 
-      <button type="submit">
-        Reset Password
-      </button>
-    </form>
+        <h2>
+          Reset Password
+        </h2>
+
+        <form
+          onSubmit={handleSubmit}
+        >
+
+          <div className="form-group">
+
+            <label>
+              Reset Token
+            </label>
+
+            <input
+              type="text"
+              placeholder="Paste token"
+              value={token}
+              onChange={(e) =>
+                setToken(
+                  e.target.value
+                )
+              }
+              required
+            />
+
+          </div>
+
+          <div className="form-group">
+
+            <label>
+              New Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Enter new password"
+              value={password}
+              onChange={(e) =>
+                setPassword(
+                  e.target.value
+                )
+              }
+              required
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="submit-btn"
+          >
+            Reset Password
+          </button>
+
+        </form>
+
+        <p
+          style={{
+            marginTop: "15px"
+          }}
+        >
+          <Link to="/">
+            Back to Login
+          </Link>
+        </p>
+
+      </div>
+
+    </div>
   );
 }
 

@@ -1,71 +1,185 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import StatCard from "../components/StatCard";
 
 function Dashboard() {
-  const navigate = useNavigate();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-  const [user, setUser] = useState(null);
+  const [user, setUser] =
+    useState(null);
+
+  const [stats, setStats] =
+    useState({
+      employees: 0,
+      departments: 0,
+      skills: 0,
+      images: 0
+    });
 
   useEffect(() => {
     fetchProfile();
+    fetchStats();
   }, []);
 
-  const fetchProfile = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  const fetchProfile =
+    async () => {
 
-      const res = await axios.get(
-        "http://localhost:5000/api/user/profile",
-        {
-          headers: {
-            Authorization: token
-          }
-        }
-      );
+      try {
 
-      setUser(res.data);
+        const token =
+          localStorage.getItem("token");
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        const res =
+          await axios.get(
+            "http://localhost:5000/api/user/profile",
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          );
+
+        setUser(res.data);
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
+
+  const fetchStats =
+    async () => {
+
+      try {
+
+        const token =
+          localStorage.getItem("token");
+
+        const res =
+          await axios.get(
+            "http://localhost:5000/api/dashboard/stats",
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          );
+
+        setStats(res.data);
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
 
   if (!user) {
     return <h2>Loading...</h2>;
   }
 
   return (
-    <div className="dashboard-card">
-      <h1>Welcome {user.name}</h1>
+    <div className="layout">
 
-      <p>
-        <strong>Name:</strong> {user.name}
-      </p>
+      <Sidebar />
 
-      <p>
-        <strong>Email:</strong> {user.email}
-      </p>
+      <div className="content">
 
-      <p>
-        <strong>Role:</strong> {user.role}
-      </p>
-      <p>
-        <strong>Verified:</strong>{" "}
-            {user.verified ? "Yes" : "No"}
-      </p>
-      <p>
-        <strong>Last Login:</strong>{" "}
-        {user.last_login}
-      </p>
+        <Navbar />
 
-            <button onClick={logout}>
-        Logout
-      </button>
+        <div className="page">
+
+          <h1>
+            Welcome, {user.name}
+          </h1>
+
+          <div className="cards">
+
+            <StatCard
+              title="Employees"
+              value={stats.employees}
+            />
+
+            <StatCard
+              title="Departments"
+              value={stats.departments}
+            />
+
+            <StatCard
+              title="Skills"
+              value={stats.skills}
+            />
+
+            <StatCard
+              title="Images"
+              value={stats.images}
+            />
+
+          </div>
+
+          <div
+            className="card"
+            style={{
+              marginTop: "25px"
+            }}
+          >
+
+            <h2>
+              User Information
+            </h2>
+
+            <br />
+
+            <p>
+              <strong>Name:</strong>{" "}
+              {user.name}
+            </p>
+
+            <br />
+
+            <p>
+              <strong>Email:</strong>{" "}
+              {user.email}
+            </p>
+
+            <br />
+
+            <p>
+              <strong>Role:</strong>{" "}
+              {user.role}
+            </p>
+
+            <br />
+
+            <p>
+              <strong>Verified:</strong>{" "}
+              {
+                user.verified
+                  ? "Yes"
+                  : "No"
+              }
+            </p>
+
+            <br />
+
+            <p>
+              <strong>
+                Last Login:
+              </strong>{" "}
+              {user.last_login}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

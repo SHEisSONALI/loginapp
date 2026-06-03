@@ -6,78 +6,148 @@ import {
 } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({
-    email: "",
-    password: ""
-  });
+
+  const navigate =
+    useNavigate();
+
+  const [form, setForm] =
+    useState({
+      email: "",
+      password: ""
+    });
 
   const handleChange = (e) => {
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]:
+        e.target.value
     });
+
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit =
+    async (e) => {
 
-  try {
-    const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
-      form
-    );
+      e.preventDefault();
 
-    localStorage.setItem(
-      "token",
-      res.data.token
-    );
+      try {
 
-    alert("Login Success");
-    navigate("/dashboard");
+        const res =
+          await axios.post(
+            "http://localhost:5000/api/auth/login",
+            form
+          );
 
-  } catch (error) {
-    alert(
-      error.response?.data?.message ||
-      "Login failed"
-    );
-  }
-};
+        localStorage.setItem(
+          "token",
+          res.data.token
+        );
+
+        alert(
+          "Login Successful"
+        );
+
+        navigate(
+          "/dashboard"
+        );
+
+      } catch (error) {
+
+        alert(
+          error.response?.data?.message ||
+          "Login failed"
+        );
+
+      }
+
+    };
 
   return (
-  <form onSubmit={handleSubmit}>
-    <h2>Login</h2>
+    <div className="auth-container">
 
-    <input
-      name="email"
-      placeholder="Email"
-      onChange={handleChange}
-    />
+      <div className="auth-card">
 
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      onChange={handleChange}
-    />
+        <h1>EMS</h1>
 
-    <button type="submit">
-      Login
-    </button>
-    <p>
-  <Link to="/forgot-password">
-    Forgot Password?
-  </Link>
-</p>
-     <p>
-    Don't have an account?
-    <Link to="/signup">
-      Signup
-    </Link>
-  </p>
-  </form>
-  
-);
+        <h2>Login</h2>
+
+        <form
+          onSubmit={handleSubmit}
+        >
+
+          <div className="form-group">
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={form.email}
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          <div className="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={
+                form.password
+              }
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="submit-btn"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <p
+          style={{
+            marginTop: "15px"
+          }}
+        >
+          <Link to="/forgot-password">
+            Forgot Password?
+          </Link>
+        </p>
+
+        <p
+          style={{
+            marginTop: "10px"
+          }}
+        >
+          Don't have an account?{" "}
+          <Link to="/signup">
+            Signup
+          </Link>
+        </p>
+
+      </div>
+
+    </div>
+  );
 }
 
 export default Login;

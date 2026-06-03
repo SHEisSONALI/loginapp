@@ -1,75 +1,155 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 function Signup() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+
+  const navigate =
+    useNavigate();
+
+  const [form, setForm] =
+    useState({
+      name: "",
+      email: "",
+      password: ""
+    });
 
   const handleChange = (e) => {
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]:
+        e.target.value
     });
+
   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit =
+    async (e) => {
 
-  try {
-    const res = await axios.post(
-      "http://localhost:5000/api/auth/signup",
-      form
-    );
+      e.preventDefault();
 
-    alert(res.data.message);
+      try {
 
-  } catch (error) {
-    alert(
-      error.response?.data?.message ||
-      "Something went wrong"
-    );
-  }
-};
+        const res =
+          await axios.post(
+            "http://localhost:5000/api/auth/signup",
+            form
+          );
+
+        alert(
+          res.data.message
+        );
+
+        navigate("/");
+
+      } catch (error) {
+
+        alert(
+          error.response?.data?.message ||
+          "Something went wrong"
+        );
+
+      }
+
+    };
 
   return (
-  <form onSubmit={handleSubmit}>
-    <h2>Sign Up</h2>
+    <div className="auth-container">
 
-    <input
-      name="name"
-      placeholder="Full Name"
-      onChange={handleChange}
-    />
+      <div className="auth-card">
 
-    <input
-      name="email"
-      placeholder="Email"
-      onChange={handleChange}
-    />
+        <h1>EMS</h1>
 
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      onChange={handleChange}
-    />
+        <h2>Sign Up</h2>
 
-    <button type="submit">
-      Register
-    </button>
-    <p>
-  Already have an account?
-  <Link to="/">
-    Login
-  </Link>
-</p>
-  </form>
-);
+        <form
+          onSubmit={handleSubmit}
+        >
 
+          <div className="form-group">
+
+            <label>
+              Full Name
+            </label>
+
+            <input
+              name="name"
+              placeholder="Enter name"
+              value={form.name}
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          <div className="form-group">
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={form.email}
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          <div className="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={
+                form.password
+              }
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="submit-btn"
+          >
+            Register
+          </button>
+
+        </form>
+
+        <p
+          style={{
+            marginTop: "15px"
+          }}
+        >
+          Already have an account?{" "}
+          <Link to="/">
+            Login
+          </Link>
+        </p>
+
+      </div>
+
+    </div>
+  );
 }
 
 export default Signup;
