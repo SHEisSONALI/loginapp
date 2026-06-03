@@ -1,19 +1,8 @@
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import AppRoutes from "./routes/AppRoutes";
 import "./App.css";
 
 function App() {
-  return (
-    <div className="container">
-      <div className="card">
-        <Signup />
-      </div>
-
-      <div className="card">
-        <Login />
-      </div>
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;

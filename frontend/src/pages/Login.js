@@ -1,7 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -29,6 +34,7 @@ function Login() {
     );
 
     alert("Login Success");
+    navigate("/dashboard");
 
   } catch (error) {
     alert(
@@ -58,7 +64,19 @@ function Login() {
     <button type="submit">
       Login
     </button>
+    <p>
+  <Link to="/forgot-password">
+    Forgot Password?
+  </Link>
+</p>
+     <p>
+    Don't have an account?
+    <Link to="/signup">
+      Signup
+    </Link>
+  </p>
   </form>
+  
 );
 }
 

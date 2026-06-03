@@ -1,7 +1,13 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #f8f4ff,
+    #efe7ff,
+    #e8dcff
+  );
+  min-height: 100vh;
 }
 
 .container {
@@ -10,14 +16,23 @@ body {
   justify-content: center;
   align-items: center;
   gap: 30px;
+  padding: 20px;
 }
 
 .card {
-  background: white;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: 320px;
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px rgba(122, 90, 248, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 340px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 form {
@@ -25,29 +40,85 @@ form {
   flex-direction: column;
 }
 
+h1,
 h2 {
   text-align: center;
+  color: #5b3cc4;
   margin-bottom: 20px;
 }
 
 input {
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #d7c7ff;
+  border-radius: 10px;
   font-size: 14px;
+  background: #fcfaff;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
 }
 
 button {
   padding: 12px;
   border: none;
-  border-radius: 8px;
-  background: #2563eb;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #6d28d9
+  );
   color: white;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(109, 40, 217, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+p {
+  text-align: center;
+  color: #555;
+}
+
+a {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.92);
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px rgba(122, 90, 248, 0.15);
+}
+
+.dashboard-card p {
+  text-align: left;
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.dashboard-card strong {
+  color: #5b3cc4;
 }
