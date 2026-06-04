@@ -69,7 +69,16 @@ router.post(
             "Employee profile already exists"
         });
       }
-
+console.log("Incoming Employee Data:");
+console.log({
+  user_id: req.user.id,
+  department_id,
+  phone,
+  address,
+  designation,
+  salary,
+  salaryType: typeof salary
+});
       const profile =
         await pool.query(
           `

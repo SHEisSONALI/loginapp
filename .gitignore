@@ -138,3 +138,6 @@ dist
 # Environment variables
 .env
 backend/.env
+
+#uploads files 
+uploads/
