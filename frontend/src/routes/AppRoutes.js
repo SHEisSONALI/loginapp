@@ -10,6 +10,10 @@ import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
+import DepartmentMaster from "../pages/DepartmentMaster";
+import SkillsMaster from "../pages/SkillsMaster";
+import CreateEmployee from "../pages/CreateEmployee";
+import EmployeeList from "../pages/EmployeeList";
 
 function AppRoutes() {
   return (
@@ -43,7 +47,10 @@ function AppRoutes() {
                 </ProtectedRoute>
             }
             />
-          
+          <Route path="/departments" element={<DepartmentMaster />} />
+<Route path="/skills" element={<SkillsMaster />} />
+<Route path="/create-employee" element={<CreateEmployee />} />
+<Route path="/employees" element={<EmployeeList />} />
       </Routes>
     </BrowserRouter>
   );

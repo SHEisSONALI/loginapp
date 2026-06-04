@@ -125,7 +125,7 @@ function Dashboard() {
           <div
             className="card"
             style={{
-              marginTop: "25px"
+              marginTop: "20px"
             }}
           >
 
@@ -136,7 +136,7 @@ function Dashboard() {
             <br />
 
             <p>
-              <strong>Name:</strong>{" "}
+            Name:{" "}
               {user.name}
             </p>
 
