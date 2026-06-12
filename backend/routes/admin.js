@@ -6,6 +6,15 @@ const authMiddleware =
 
 const adminMiddleware =
   require("../middleware/adminMiddleware");
+const roleCheck =
+  require("../middleware/adminMiddleware");
+
+router.get(
+  "/employees",
+  authMiddleware,
+  roleCheck("admin", "hr"),
+  adminMiddleware
+);
 
 router.get(
   "/dashboard",

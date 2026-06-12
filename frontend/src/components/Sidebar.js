@@ -1,10 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
+  const user = JSON.parse(
+  localStorage.getItem("user")
+);
+console.log("USER:", user);
+{user?.role === "Admin" && (
+  <Link to="/departments">
+    Departments
+  </Link>
+)}
+{["Admin", "HR Manager"].includes(user?.role) && (
+  <Link to="/employees">
+    Employees
+  </Link>
+)}
+{["Admin","HR Manager","Employee"].includes(user?.role) && (
+  <Link to="/leave-request">
+    Leave Request
+  </Link>
+)}
 
   const location =
     useLocation();
-
+  
   return (
     <div className="sidebar">
 
