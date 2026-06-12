@@ -32,16 +32,7 @@ function Sidebar() {
         Employees
       </Link>
 
-      <Link
-        className={
-          location.pathname === "/create-employee"
-            ? "active-link"
-            : ""
-        }
-        to="/create-employee"
-      >
-        Create Employee
-      </Link>
+    
 
       <Link
         className={
@@ -64,7 +55,16 @@ function Sidebar() {
       >
         Skills
       </Link>
-
+         <Link
+        className={
+          location.pathname === "/leave-request"
+            ? "active-link"
+            : ""
+        }
+        to="/leave-request"
+      >
+        Leave Request
+      </Link>
     </div>
   );
 }

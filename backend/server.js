@@ -14,6 +14,9 @@ const dashboardRoutes = require("./routes/dashboard");
 
 const app = express();
 
+const leaveRoutes = require("./routes/leave");
+
+
 /* Middlewares */
 
 app.use(cors());
@@ -60,6 +63,7 @@ app.use(
   "/api/dashboard",
   dashboardRoutes
 );
+app.use("/api/leave", leaveRoutes);
 
 /* Health Check */
 

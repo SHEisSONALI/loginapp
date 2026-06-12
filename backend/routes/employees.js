@@ -155,7 +155,7 @@ router.get(
           INNER JOIN departments d
             ON ep.department_id = d.id
           ORDER BY ep.id
-        `);
+        `); 
 
       res.json({
         success: true,
