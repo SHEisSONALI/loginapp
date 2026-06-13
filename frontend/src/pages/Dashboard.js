@@ -17,15 +17,12 @@ function Dashboard() {
       skills: 0,
       images: 0
     });
+const token = localStorage.getItem("token");
 
- useEffect(() => {
-  const loadData = async () => {
-    await fetchProfile();
-    await fetchStats();
-  };
-
-  loadData();
-}, []);
+useEffect(() => {
+  fetchProfile();
+  fetchStats();
+}, [fetchProfile, fetchStats]);
 
   const fetchProfile =
     useCallback(async () => {
