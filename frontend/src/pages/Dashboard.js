@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 import Sidebar from "../components/Sidebar";
@@ -18,13 +18,17 @@ function Dashboard() {
       images: 0
     });
 
-  useEffect(() => {
-    fetchProfile();
-    fetchStats();
-  }, []);
+ useEffect(() => {
+  const loadData = async () => {
+    await fetchProfile();
+    await fetchStats();
+  };
+
+  loadData();
+}, []);
 
   const fetchProfile =
-    async () => {
+    useCallback(async () => {
 
       try {
 
@@ -49,10 +53,10 @@ function Dashboard() {
 
       }
 
-    };
+    }, [token]);
 
   const fetchStats =
-    async () => {
+    useCallback(async () => {
 
       try {
 
@@ -77,7 +81,7 @@ function Dashboard() {
 
       }
 
-    };
+    }, [token]);
 
   if (!user) {
     return <h2>Loading...</h2>;

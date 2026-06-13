@@ -37,50 +37,35 @@ function CreateEmployee() {
   
 useEffect(() => {
   const loadData = async () => {
-    await fetchDepartments();
-    await fetchSkills();
+    try {
+      const deptRes = await axios.get(
+        "http://localhost:5000/api/departments",
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      setDepartments(deptRes.data);
+
+      const skillRes = await axios.get(
+        "http://localhost:5000/api/skills",
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      setSkills(skillRes.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   loadData();
-}, []);
-
-  const fetchDepartments =
-    async () => {
-
-      const res =
-        await axios.get(
-          "http://localhost:5000/api/departments",
-          {
-            headers: {
-              Authorization:
-                token
-            }
-          }
-        );
-
-      setDepartments(
-        res.data
-      );
-    };
-
-  const fetchSkills =
-    async () => {
-
-      const res =
-        await axios.get(
-          "http://localhost:5000/api/skills",
-          {
-            headers: {
-              Authorization:
-                token
-            }
-          }
-        );
-
-      setSkills(
-        res.data
-      );
-    };
+}, [token]);
 
   const handleSubmit =
     async (e) => {

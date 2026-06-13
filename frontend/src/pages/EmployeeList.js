@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
@@ -12,35 +12,27 @@ function EmployeeList() {
   const token =
     localStorage.getItem("token");
 
-  useEffect(() => {
-    const loadData = async () => {
-      await fetchEmployees();
-    };
+ useEffect(() => {
+  fetchEmployees();
+}, [fetchEmployees]);
 
-    loadData();
-  }, []);
+ const fetchEmployees = useCallback(async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:5000/api/employees",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
 
-  const fetchEmployees =
-    async () => {
+    setEmployees(res.data.employees);
+  } catch (error) {
+    console.log(error);
+  }
+}, [token]);
 
-      const res =
-        await axios.get(
-          "http://localhost:5000/api/employees",
-          {
-            headers: {
-              Authorization:
-                token
-            }
-          }
-        );
-        console.log(
-  "Employees Array:",
-  res.data.employees
-);
-      setEmployees(
-        res.data.employees
-      );
-    };
 console.log(
   "Employees State:",
   employees

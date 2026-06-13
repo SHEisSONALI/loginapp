@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
@@ -16,16 +16,33 @@ function DepartmentMaster() {
   const token =
     localStorage.getItem("token");
 
+  useEffect(() => {
+  fetchDepartments();
+}, [fetchDepartments]);
+
  useEffect(() => {
   const loadData = async () => {
-    await fetchDepartments();
+    try {
+      const res = await axios.get(
+        "http://localhost:5000/api/departments",
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      setDepartments(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   loadData();
-}, []);
+}, [token]);
 
   const fetchDepartments =
-    async () => {
+    useCallback(async () => {
 
       try {
 
@@ -46,7 +63,7 @@ function DepartmentMaster() {
       } catch (error) {
         console.log(error);
       }
-    };
+    }, [token]);
 
   const handleSubmit =
     async (e) => {
