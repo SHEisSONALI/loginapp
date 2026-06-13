@@ -14,6 +14,7 @@ import DepartmentMaster from "../pages/DepartmentMaster";
 import SkillsMaster from "../pages/SkillsMaster";
 import CreateEmployee from "../pages/CreateEmployee";
 import EmployeeList from "../pages/EmployeeList";
+import LeaveRequest from "../pages/LeaveRequest";
 
 function AppRoutes() {
   return (
@@ -51,6 +52,7 @@ function AppRoutes() {
 <Route path="/skills" element={<SkillsMaster />} />
 <Route path="/create-employee" element={<CreateEmployee />} />
 <Route path="/employees" element={<EmployeeList />} />
+<Route path="/leave-request" element={<LeaveRequest />} />
       </Routes>
     </BrowserRouter>
   );

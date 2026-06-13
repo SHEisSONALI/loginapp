@@ -105,11 +105,17 @@ router.post("/login", async (req, res) => {
       [user.rows[0].id, refreshToken]
     );
 
-    res.json({
-      message: "Login Success",
-      token: accessToken,
-      refreshToken
-    });
+   res.json({
+  message: "Login Success",
+  token: accessToken,
+  refreshToken,
+
+  user: {
+    id: user.rows[0].id,
+    email: user.rows[0].email,
+    role: user.rows[0].role
+  }
+});
 
   } catch (error) {
     res.status(500).json({

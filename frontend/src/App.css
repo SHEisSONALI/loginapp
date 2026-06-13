@@ -75,7 +75,7 @@ textarea {
 }
 
 .submit-btn:hover {
-  background: #6946d0;
+  background: #a18dde;
 }
 
 /* LAYOUT */
@@ -87,7 +87,7 @@ textarea {
 
 .sidebar {
   width: 240px;
-  background: #7b5cd6;
+  background: #a18dde;
   color: white;
   padding: 25px;
 }
@@ -170,7 +170,7 @@ table {
 }
 
 th {
-  background: #7b5cd6;
+  background: #a18dde;
   color: white;
   text-align: left;
   padding: 12px;
