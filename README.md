@@ -15,6 +15,7 @@ A full-stack authentication application built with React, Node.js, Express, Post
 - Refresh Tokens
 - Role-Based Access Control (RBAC)
 - Last Login Tracking
+- HRMS (leave approval system)
 
 ## Tech Stack
 
@@ -38,12 +39,12 @@ A full-stack authentication application built with React, Node.js, Express, Post
 
 ```text
 loginapp
-├── frontend
 ├── backend
-└── database
+├── frontend
+
 ```
 
-## Running the Project
+## Installation
 
 ### Backend
 
@@ -60,3 +61,7 @@ cd frontend
 npm install
 npm start
 ```
+
+## Deployment URLs
+
+#### SONALI SHEKHAWAT
