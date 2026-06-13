@@ -19,10 +19,14 @@ function Dashboard() {
     });
 const token = localStorage.getItem("token");
 
-useEffect(() => {
-  fetchProfile();
-  fetchStats();
-}, [fetchProfile, fetchStats]);
+ useEffect(() => {
+  const loadData = async () => {
+    await fetchProfile();
+    await fetchStats();
+  };
+
+  loadData();
+}, []);
 
   const fetchProfile =
     useCallback(async () => {
